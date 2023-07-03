@@ -5,8 +5,8 @@ name = "pypi"
 
 [packages]
 django = "==3.2"
-celery = "*"
 gunicorn = "*"
+celery = "==5.2.3"
 
 [dev-packages]
 
