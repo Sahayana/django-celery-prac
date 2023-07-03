@@ -14,6 +14,7 @@ RUN apt-get update
 RUN apt-get install -y python3.7 python3-pip python3.7-distutils
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1
 RUN python -m pip install -r requirements.txt
+RUN adduser --disabled-password --gecos '' myuser
 
 
 EXPOSE 8000
