@@ -25,11 +25,11 @@ services:
             - rabbitmq
 
     # Celery worker
-    worker:
+    celery:
         build:
             context: .
             dockerfile: Dockerfile
-        command: ./run_celery.sh
+        command: celery -A app worker -l info
         links:
             - rabbitmq
         depends_on:
