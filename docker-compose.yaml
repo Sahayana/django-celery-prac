@@ -1,0 +1,38 @@
+version: '3'
+services:
+    
+    # RabbitMQ
+    rabbitmq:
+        hostname: rabbitmq
+        image: rabbitmq:3.6.9
+        environment:
+            - RABBITMQ_DEFAULT_USER=admin
+            - RABBITMQ_DEFAULT_PASS=mypass
+        ports:
+            - "5672:5672"
+            
+    # Django
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        hostname: web
+        volumes:
+            - /home/ubuntu/.aws/credentials:/root/.aws/credentials
+        ports:
+            - 8000:8000
+        links:
+            - rabbitmq
+
+    # Celery worker
+    worker:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: ./run_celery.sh
+        links:
+            - rabbitmq
+        depends_on:
+            - rabbitmq
+            - web
+ 
