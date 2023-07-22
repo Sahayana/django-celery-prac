@@ -3,14 +3,14 @@ version: '3.8'
 services:
 
   redis:
-  
+
     image: redis:7.0.11-alpine
     hostname: redis
 
   django:
 
     container_name: django
-    hostname: redis
+    hostname: django
     build:
       context: .
       dockerfile: Dockerfile.django
