@@ -31,7 +31,7 @@ services:
       build:
           context: .
           dockerfile: Dockerfile.django
-      command: celery -A app worker -l info
+      command: celery --app=dcelery worker -l info
       links:
           - redis
       depends_on:
