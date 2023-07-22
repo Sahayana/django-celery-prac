@@ -6,6 +6,8 @@ services:
 
     image: redis:7.0.11-alpine
     hostname: redis
+    ports:
+      - 6379:6379
 
   django:
 
@@ -24,3 +26,14 @@ services:
       - ALLOWED_HOSTS=localhost, 127.0.0.1
     depends_on:
       - redis
+
+  celery:
+      build:
+          context: .
+          dockerfile: Dockerfile.django
+      command: celery -A app worker -l info
+      links:
+          - redis
+      depends_on:
+          - redis
+          - django
