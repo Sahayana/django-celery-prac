@@ -2,9 +2,15 @@ version: '3.8'
 
 services:
 
+  redis:
+  
+    image: redis:7.0.11-alpine
+    hostname: redis
+
   django:
 
     container_name: django
+    hostname: redis
     build:
       context: .
       dockerfile: Dockerfile.django
@@ -16,3 +22,5 @@ services:
     environment:
       - DEBUG=1
       - ALLOWED_HOSTS=localhost, 127.0.0.1
+    depends_on:
+      - redis
