@@ -7,6 +7,9 @@ name = "pypi"
 django = "==3.2"
 gunicorn = "*"
 celery = "==5.2.3"
+install = "*"
+importlib-metadata = "<5.0"
+redis = "*"
 
 [dev-packages]
 
