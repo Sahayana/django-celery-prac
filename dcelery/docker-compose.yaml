@@ -40,3 +40,12 @@ services:
     depends_on:
         - redis
         - django
+  
+  celery2:
+    build:
+        context: ./celery
+        dockerfile: Dockerfile.celery
+    command: celery -A celeryapp worker -l info
+    depends_on:
+        - redis
+        - django
